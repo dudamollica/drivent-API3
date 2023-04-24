@@ -31,7 +31,7 @@ async function findById(enrollmentId: number) {
 }
 
 async function findByUserId(userId: number): Promise<Enrollment> {
-  return await prisma.enrollment.findFirst({ where: { userId } });
+  return await prisma.enrollment.findUnique({ where: { userId } });
 }
 
 export type CreateEnrollmentParams = Omit<Enrollment, 'id' | 'createdAt' | 'updatedAt'>;

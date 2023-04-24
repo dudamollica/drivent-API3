@@ -3,11 +3,10 @@ import ticketsRepository from '@/repositories/tickets-repository';
 import enrollmentRepository from '@/repositories/enrollment-repository';
 import { Hotel } from '@prisma/client';
 import httpStatus from 'http-status';
-import { notFoundError } from '@/errors';
 
 async function listAllHotels(userId: number): Promise<Hotel[]> {
   const hotels = await hotelsRepository.findAll();
-  if (hotels.length == 0) throw notFoundError();
+  if (hotels.length == 0) throw new Error();
 
   const enrollment = await enrollmentRepository.findByUserId(userId);
   if (!enrollment) throw new Error();
